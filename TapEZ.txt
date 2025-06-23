@@ -1,0 +1,84 @@
+﻿Great! Let’s begin with Phase 1: Kickoff & Setup (June 23 – 24). Here's what each team member should do based on their roles:
+________________
+
+
+🔹 Phase 1: Kickoff & Setup (June 23–24)
+🟢 Goal: Project foundation ready — tech stack finalized, roles aligned, GitHub ready, and mock designs in place.
+________________
+
+
+🧑‍💻 Jaswanth – React Native & iOS Lead
+* Set up React Native project with basic navigation (React Navigation)
+
+* Ensure iOS simulator runs the app cleanly
+
+* Create empty screens for:
+
+   * Home
+
+   * Cart View
+
+   * Billing/Checkout Review
+
+      * Push base project to GitHub and ensure other members can pull
+
+✅ Deliverable: Basic app skeleton running on iOS
+________________
+
+
+🧑‍💻 Sanath – NFC Hardware & Integration
+         * Choose NFC hardware: ESP32 + RC522 or Raspberry Pi + NFC HAT
+
+         * Prepare environment for embedded coding (e.g., Arduino IDE / PlatformIO / Python for Pi)
+
+         * Connect RC522 with your board and write a simple sketch:
+
+            * Detect card tap
+
+            * Turn on Green LED on valid read
+
+            * Turn on Red LED on failure
+
+               * Document pin config and wiring diagram
+
+✅ Deliverable: NFC reader reads cards + LED feedback works
+________________
+
+
+🧑‍💻 Umesh – Backend & API Developer
+                  * Choose backend stack: Node.js + Express + MongoDB (or Firebase alternative)
+
+                  * Set up folder structure and initialize project (e.g., with nodemon, dotenv)
+
+                  * Create mock data schema for:
+
+                     * Products
+
+                     * Cart
+
+                     * Sessions
+
+                        * Build basic GET API: /products (return static list of 3–5 items)
+
+                        * Push backend repo to GitHub
+
+✅ Deliverable: Server runs locally and serves a dummy product list
+________________
+
+
+📁 Shared Tasks:
+                           * Create shared GitHub organization/repo access for all three modules
+
+                           * Create a shared Google Doc or Notion for:
+
+                              * API documentation
+
+                              * NFC ID mapping
+
+                              * Wireframes
+
+________________
+
+
+Would you like me to generate a GitHub folder structure suggestion or some sample wireframes you can copy into Figma or Miro?
+Let’s knock this out by tomorrow night so Phase 2 (development) begins smoothly!
