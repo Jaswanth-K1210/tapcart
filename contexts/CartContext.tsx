@@ -1,4 +1,9 @@
-import React, { createContext, useState, ReactNode } from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+} from 'react';
 
 export type Item = {
   id: string;
@@ -9,38 +14,36 @@ export type Item = {
 type CartContextType = {
   cartItems: Item[];
   addItem: (item: Item) => void;
-  removeItem: (id: string) => void;
   clearCart: () => void;
 };
 
-export const CartContext = createContext<CartContextType>({
+const CartContext = createContext<CartContextType>({
   cartItems: [],
   addItem: () => {},
-  removeItem: () => {},
   clearCart: () => {},
 });
+
+export const useCart = () => useContext(CartContext); // ✅ EXPORT THIS
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<Item[]>([
     {
-      id: 'bluff1',
-      name: 'Bluff Demo Product',
-      price: 99,
+      id: '1',
+      name: 'Cola 500ml',
+      price: 45,
     },
   ]);
 
   const addItem = (item: Item) => {
-    setCartItems((prev) => [...prev, item]);
+    setCartItems(prev => [...prev, item]);
   };
 
-  const removeItem = (id: string) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  const clearCart = () => {
+    setCartItems([]);
   };
-
-  const clearCart = () => setCartItems([]);
 
   return (
-    <CartContext.Provider value={{ cartItems, addItem, removeItem, clearCart }}>
+    <CartContext.Provider value={{ cartItems, addItem, clearCart }}>
       {children}
     </CartContext.Provider>
   );

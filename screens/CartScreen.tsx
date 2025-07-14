@@ -1,25 +1,47 @@
-import React, { useContext } from 'react';
-import { View, Text, FlatList, Button } from 'react-native';
-import { CartContext } from '../contexts/CartContext';
+import React from 'react';
+import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
+import { useCart } from '../contexts/CartContext';
 import { useNavigation } from '@react-navigation/native';
 
-const CartScreen = () => {
-  const { cartItems } = useContext(CartContext);
+type CartItem = {
+  id: string;
+  name: string;
+  price: number;
+};
+
+export default function CartScreen() {
+  const { cartItems } = useCart();
   const navigation = useNavigation<any>();
+  const total = cartItems.reduce((sum: number, item: CartItem) => sum + item.price, 0);
 
   return (
-    <View style={{ flex: 1, padding: 16 }}>
-      <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Cart</Text>
+    <View style={styles.container}>
+      <Text style={styles.heading}>Your Cart</Text>
       <FlatList
         data={cartItems}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => item.id + index}
         renderItem={({ item }) => (
-          <Text>{item.name} - ₹{item.price}</Text>
+          <View style={styles.item}>
+            <Text>{item.name}</Text>
+            <Text>₹{item.price}</Text>
+          </View>
         )}
+        ListEmptyComponent={<Text>Your cart is empty.</Text>}
       />
+      <Text style={styles.total}>Total: ₹{total}</Text>
       <Button title="Proceed to Checkout" onPress={() => navigation.navigate('Checkout')} />
     </View>
   );
-};
+}
 
-export default CartScreen;
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 20 },
+  heading: { fontSize: 22, marginBottom: 20 },
+  item: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    borderBottomWidth: 0.5,
+  },
+  total: { marginTop: 20, fontWeight: 'bold', fontSize: 16 },
+});

@@ -1,27 +1,34 @@
 import React, { useEffect } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
-import { useNavigation, RouteProp, useRoute } from '@react-navigation/native';
-import { RootStackParamList } from '../navigation/AppNavigator';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { useNavigation, useRoute, NavigationProp } from '@react-navigation/native';
 
-import { StackNavigationProp } from '@react-navigation/stack';
+// Define your stack param list
+type RootStackParamList = {
+  Payment: { orderId: string };
+  Success: { orderId: string };
+  // add other screens here if needed
+};
 
 export default function PaymentPortalScreen() {
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList, 'Payment'>>();
-  const route = useRoute<RouteProp<RootStackParamList, 'Payment'>>();
-  const { orderId } = route.params;
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const route = useRoute();
+  const { orderId } = route.params as { orderId: string };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    setTimeout(() => {
       navigation.navigate('Success', { orderId });
-    }, 2000); // simulate 2s payment processing
-
-    return () => clearTimeout(timer);
+    }, 2000);
   }, []);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={{ fontSize: 18, marginBottom: 10 }}>Processing Payment...</Text>
-      <ActivityIndicator size="large" color="blue" />
+    <View style={styles.container}>
+      <Text style={styles.text}>Processing Payment...</Text>
+      <ActivityIndicator size="large" color="#0000ff" />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  text: { fontSize: 18, marginBottom: 10 },
+});

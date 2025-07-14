@@ -1,31 +1,36 @@
-import React, { useContext } from 'react';
-import { View, Text, Button } from 'react-native';
-import { CartContext } from '../contexts/CartContext';
-import { useNavigation } from '@react-navigation/native';
-const uuidv4 = () => 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
-    const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-    return v.toString(16);
-});
+import React from 'react';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { v4 as uuidv4 } from 'uuid';
 
-const CheckoutScreen = () => {
-  const { cartItems, clearCart } = useContext(CartContext);
-  const navigation = useNavigation<any>();
-
- const handleCheckout = () => {
-  const orderId = uuidv4();
-  navigation.navigate('Payment', { orderId });
+// Define the navigation param list for your stack
+type RootStackParamList = {
+  Cart: undefined;
+  Checkout: undefined;
+  Payment: { orderId: string };
+  Tap: undefined;
+  Success: { orderId: string };
 };
 
+export default function CheckoutScreen() {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
-  const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const handlePay = () => {
+    const orderId = uuidv4();
+    navigation.navigate('Payment', { orderId });
+  };
 
   return (
-    <View style={{ padding: 16 }}>
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Checkout</Text>
-      <Text>Total: ₹{total}</Text>
-      <Button title="Place Order" onPress={handleCheckout} />
+    <View style={styles.container}>
+      <Text style={styles.heading}>Review & Pay</Text>
+      <Button title="Lock Cart" onPress={() => {}} />
+      <View style={{ height: 20 }} />
+      <Button title="Pay Now" onPress={handlePay} />
     </View>
   );
-};
+}
 
-export default CheckoutScreen;
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 20, justifyContent: 'center', alignItems: 'center' },
+  heading: { fontSize: 20, marginBottom: 20 },
+});
