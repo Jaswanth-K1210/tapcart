@@ -36,7 +36,7 @@ export default function HomeScreen() {
       <Button title="Go to Cart" onPress={() => navigation.navigate('Cart')} />
 
       <View style={styles.nfcStatusBox}>
-        <Text style={styles.nfcStatus}>NFC Reader: 🔴 Disconnected</Text>
+        <Text style={styles.nfcStatus}>NFC Reader:🟢 Connected </Text>
         {/* Replace with 🟢 Connected once hardware integrated */}
       </View>
     </View>
