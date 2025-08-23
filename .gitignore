@@ -1,0 +1,42 @@
+# Project-specific files
+CONNECTION_TEST_RESULTS.md
+DEVELOPMENT_SETUP.md
+connection-test.html
+
+# Temporary test directories
+web-test/
+
+# Environment variables (extra safety)
+**/.env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+
+# Dependencies
+**/node_modules/
+
+# Logs
+**/*.log
+**/logs/
+
+# Build outputs
+**/build/
+**/dist/
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Windows
+Thumbs.db
+**/Thumbs.db
+**/ehthumbs.db
+**/Desktop.ini
+
+# Temporary files
+**/*.tmp
+**/*.temp

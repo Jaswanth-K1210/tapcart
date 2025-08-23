@@ -1,0 +1,21 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*"]
+    },
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": [
+    "App.tsx",
+    "contexts/**/*",
+    "navigation/**/*",
+    "screens/**/*",
+    "services/**/*",
+    "config/**/*",
+    "types/**/*"
+  ]
+}
